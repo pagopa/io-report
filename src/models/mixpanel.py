@@ -35,7 +35,7 @@ class MixpanelReport(Report):
 
 # see https://docs.google.com/spreadsheets/d/11sJKhW5BPdg5GnttZc78oWKk0jMBkKCSgRnG5sgfCwQ/edit#gid=0
 _mixpanel_reports = [
-	{"description": "# download nel periodo (fonte mixpanel)", "id": 13850641},
+	{"description": "# installazioni nel periodo (fonte mixpanel)", "id": 13850641},
 	{"description": "% login successo con SPID", "id": 13850659},
 	{"description": "% login successo con CIE", "id": 15507536},
 	{"description": "# utenti attivi", "id": 13914117},
