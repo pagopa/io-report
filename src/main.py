@@ -14,16 +14,17 @@ week_ago = datetime.datetime.now() - datetime.timedelta(days=7)
 header = f":bar_chart: <https://docs.google.com/spreadsheets/d/11sJKhW5BPdg5GnttZc78oWKk0jMBkKCSgRnG5sgfCwQ/edit#gid=0|IO weekly stats> dal *{week_ago.day}/{week_ago.month}* al *{today.day}/{today.month}*"
 slack_msgs = []
 
+# collect reports
 # io user report
 reports = [IOUsersReport("# utenti unici")]
 # mixpanel report
 reports.extend(mixpanel_reports)
 
 for r in reports:
-	r.load_data()
-	if r.data is None:
+	data = r.load_data()
+	if data is None:
 		raise IOError(f"cannot retrieve data for report '{r.description}'")
-	slack_msgs.append(f"- _{r.description}_: `{r.data}`")
+	slack_msgs.append(f"- _{r.description}_: `{data}`")
 
 if len(slack_msgs):
 	send_slack_message_blocks([header, "\n".join(slack_msgs)])

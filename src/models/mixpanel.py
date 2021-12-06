@@ -31,6 +31,7 @@ class MixpanelReport(Report):
 		self.data = self.mixpanel_data_retriever.load_mixpanel_report(self)
 		if self.data:
 			self.data = format_number(self.data)
+		return self.data
 
 
 class MixpanelDataRetriever:

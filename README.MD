@@ -15,6 +15,10 @@ To send the reports to Slack, it requires the Slack web hook
 example:
 `SLACK_WEB_HOOK`: `https://hooks.slack.com/services/xyz/zyx/123`
 
+### how to add a report
+- create you own report class by extending the base [Report](src/models/report.py)
+- add your reports to the [main list](src/main.py) 
+
 ### requirements
 It needs a Python interpreter version >= 3.5
 

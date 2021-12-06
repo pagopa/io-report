@@ -15,4 +15,4 @@ class Report(metaclass=abc.ABCMeta):
 
 	@abc.abstractmethod
 	def load_data(self) -> any:
-		raise NotImplementedError("you should implement 'load_data' method in your subclass")
+		raise NotImplementedError("you should implement 'load_data' method in your subclass!")

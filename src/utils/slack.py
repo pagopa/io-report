@@ -3,7 +3,7 @@ import os
 import json
 
 # retrieve slack token from env variables
-slack_web_hook = os.getenv('SLACK_WEB_HOOK_TEST', None)
+slack_web_hook = os.getenv('SLACK_WEB_HOOK', None)
 assert slack_web_hook is not None
 
 
