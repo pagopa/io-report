@@ -11,7 +11,7 @@ SLACK_WEB_HOOK: webhook used to send the report to Slack dedicated channel
 
 today = datetime.datetime.now()
 week_ago = datetime.datetime.now() - datetime.timedelta(days=7)
-header = f":bar_chart: <https://docs.google.com/spreadsheets/d/11sJKhW5BPdg5GnttZc78oWKk0jMBkKCSgRnG5sgfCwQ/edit#gid=0|IO weekly stats> dal *{week_ago.day}/{week_ago.month}* al *{today.day}/{today.month}*"
+header = f":bar_chart: <https://github.com/pagopa/io-report|IO weekly report> dal *{week_ago.day}/{week_ago.month}* al *{today.day}/{today.month}*"
 slack_msgs = []
 
 # collect reports
@@ -21,6 +21,7 @@ reports = [IOUsersReport("# utenti unici")]
 reports.extend(mixpanel_reports)
 
 for r in reports:
+	print(f"requesting data for '{r.description}'...")
 	data = r.load_data()
 	if data is None:
 		raise IOError(f"cannot retrieve data for report '{r.description}'")

@@ -14,5 +14,5 @@ class Report(metaclass=abc.ABCMeta):
 		self.description: str = description
 
 	@abc.abstractmethod
-	def load_data(self) -> any:
+	def load_data(self) -> Union[float, int, str, None]:
 		raise NotImplementedError("you should implement 'load_data' method in your subclass!")

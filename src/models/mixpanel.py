@@ -1,8 +1,7 @@
-import requests
-import os
 from typing import Callable, Union, Optional
 from models.report import Report
 from utils.format import format_number
+from utils.mixpanel import MixpanelDataRetriever
 
 
 def default_extractor(series):
@@ -24,39 +23,14 @@ class MixpanelReport(Report):
 		Optional[Callable]] = default_extractor):
 		super(MixpanelReport, self).__init__(description)
 		self.report_id = report_id
-		self.mixpanel_data_retriever = MixpanelDataRetriever()
 		self.data_extractor = default_extractor if data_extractor is None else data_extractor
 
-	def load_data(self) -> any:
-		self.data = self.mixpanel_data_retriever.load_mixpanel_report(self)
+	def load_data(self):
+		self.data = MixpanelDataRetriever.load_mixpanel_report(self)
 		if self.data:
 			self.data = format_number(self.data)
 		return self.data
 
-
-class MixpanelDataRetriever:
-	project_id = 2460815
-	# see https://eu.mixpanel.com/report/2460815/settings/#project/2460815/serviceaccounts
-	mixpanel_token = os.getenv('MIXPANEL_SERVICE_TOKEN', None)
-	assert mixpanel_token is not None
-
-	url = f"https://eu.mixpanel.com/api/2.0/insights?project_id={project_id}"
-	headers = {
-		"Accept": "application/json",
-		"Authorization": f"Basic {mixpanel_token}"
-	}
-
-	def load_mixpanel_report(self, report: MixpanelReport):
-		try:
-			response = requests.request("GET", MixpanelDataRetriever.url + f"&bookmark_id={report.report_id}",
-			                            headers=MixpanelDataRetriever.headers)
-			data = response.json()
-			series = data["series"]
-			return report.data_extractor(series)
-		except:  # todo handle timeout & retries
-			import traceback
-			traceback.print_exc()
-			return None
 
 
 # see https://docs.google.com/spreadsheets/d/11sJKhW5BPdg5GnttZc78oWKk0jMBkKCSgRnG5sgfCwQ/edit#gid=0
