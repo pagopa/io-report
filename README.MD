@@ -8,12 +8,15 @@ This tool collects some data about the IO usage and [sends them to a Slack chann
 To collect data from Mixpanel, it requires a [service token](https://eu.mixpanel.com/report/2460815/settings/#project/2460815/serviceaccounts)
 It must be included as **env variable**
 example:
+
 `MIXPANEL_SERVICE_TOKEN`:`mp_service_token`
 
 ### slack
 To send the reports to Slack, it requires the Slack web hook
+It must be included as **env variable**
 example:
-`SLACK_WEB_HOOK`: `https://hooks.slack.com/services/xyz/zyx/123`
+
+`SLACK_WEB_HOOK`:`https://hooks.slack.com/services/xyz/zyx/123`
 
 ### how to add a report
 - create you own report class by extending the base [Report](src/models/report.py)
