@@ -18,6 +18,9 @@ example:<br/>
 
 ### how to add a report
 - create you own report class by extending the base [Report](src/models/report.py)
+
+<img src="img/my_report.jpg" />
+
 - add your reports to the [main list](src/main.py) 
 
 ### requirements
