@@ -35,7 +35,7 @@ class MixpanelReport(Report):
 
 # see https://docs.google.com/spreadsheets/d/11sJKhW5BPdg5GnttZc78oWKk0jMBkKCSgRnG5sgfCwQ/edit#gid=0
 _mixpanel_reports = [
-	{"description": "# installazioni nel periodo (fonte mixpanel)", "id": 13850641},
+	{"description": "# installazioni nel periodo (fonte Mixpanel)", "id": 13850641},
 	{"description": "% login successo con SPID", "id": 13850659},
 	{"description": "% login successo con CIE", "id": 15507536},
 	{"description": "# utenti attivi", "id": 13914117},
@@ -56,8 +56,8 @@ _mixpanel_reports = [
 	 "id": 13913973},
 	{"description": "% carte di credito aggiunte con successo", "id": 13913969},
 	{"description": "# carte di credito aggiunte nel wallet", "id": 15272532},
-	{"description": "% preferenze servizi - auto", "id": 15507584},
-	{"description": "% condivide i dati con Mixpanel", "id": 13828137, "extractor": lambda item: (item[
+	{"description": "% sceglie la preferenza AUTOMATICA per i servizi", "id": 15507584},
+	{"description": "% che condivide i dati con Mixpanel", "id": 13828137, "extractor": lambda item: (item[
 		                                                                                              "MIXPANEL_SET_ENABLED - Unique"][
 		                                                                                              "true"]["all"] /
 	                                                                                              item[

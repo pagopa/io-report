@@ -28,4 +28,5 @@ for r in reports:
 	slack_msgs.append(f"- _{r.description}_: `{data}`")
 
 if len(slack_msgs):
-	send_slack_message_blocks([header, "\n".join(slack_msgs)])
+	send_slack_message_blocks([header])
+	send_slack_message_blocks(["\n".join(slack_msgs)])
