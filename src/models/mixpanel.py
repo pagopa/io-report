@@ -32,7 +32,6 @@ class MixpanelReport(Report):
 		return self.data
 
 
-
 # see https://docs.google.com/spreadsheets/d/11sJKhW5BPdg5GnttZc78oWKk0jMBkKCSgRnG5sgfCwQ/edit#gid=0
 _mixpanel_reports = [
 	{"description": "# installazioni nel periodo (fonte Mixpanel)", "id": 13850641},
@@ -64,6 +63,14 @@ _mixpanel_reports = [
 		                                                                                              "MIXPANEL_SET_ENABLED - Unique"][
 		                                                                                              "$overall"][
 		                                                                                              "all"]) * 100},
+	{"description": "# account Paypal aggiunti", "id": 27301649,
+	 "extractor": lambda item: item["successo"]["$overall"]["all"]},
+	{"description": "% successo nell'aggiunta di un account Paypal", "id": 27301649,
+	 "extractor": lambda item: (item["successo"]["$overall"]["all"] / (
+				 (item["fallimento"]["$overall"]["all"] if 'fallimento' in item else 0) + item["successo"]["$overall"][
+			 "all"])) * 100},
+	{"description": "# pagamenti effettuati con Paypal", "id": 27302180,
+	 "extractor": lambda item: item["paypal"]["$overall"]["all"]},
 ]
 
 mixpanel_reports = []
