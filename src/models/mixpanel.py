@@ -57,20 +57,24 @@ _mixpanel_reports = [
 	{"description": "# carte di credito aggiunte nel wallet", "id": 15272532},
 	{"description": "% sceglie la preferenza AUTOMATICA per i servizi", "id": 15507584},
 	{"description": "% che condivide i dati con Mixpanel", "id": 13828137, "extractor": lambda item: (item[
-		                                                                                              "MIXPANEL_SET_ENABLED - Unique"][
-		                                                                                              "true"]["all"] /
-	                                                                                              item[
-		                                                                                              "MIXPANEL_SET_ENABLED - Unique"][
-		                                                                                              "$overall"][
-		                                                                                              "all"]) * 100},
+																										  "MIXPANEL_SET_ENABLED - Unique"][
+																										  "true"][
+																										  "all"] /
+																									  item[
+																										  "MIXPANEL_SET_ENABLED - Unique"][
+																										  "$overall"][
+																										  "all"]) * 100},
 	{"description": "# account Paypal aggiunti", "id": 27301649,
 	 "extractor": lambda item: item["successo"]["$overall"]["all"]},
 	{"description": "% successo nell'aggiunta di un account Paypal", "id": 27301649,
 	 "extractor": lambda item: (item["successo"]["$overall"]["all"] / (
-				 (item["fallimento"]["$overall"]["all"] if 'fallimento' in item else 0) + item["successo"]["$overall"][
-			 "all"])) * 100},
+			 (item["fallimento"]["$overall"]["all"] if 'fallimento' in item else 0) + item["successo"]["$overall"][
+		 "all"])) * 100},
+	{"description": "# pagamenti effettuati con carta di credito", "id": 27302180,
+	 "extractor": lambda item: item["carta di credito"].get("0", {"all": 0})[
+		 "all"] if "carta di credito" in item else 0},
 	{"description": "# pagamenti effettuati con Paypal", "id": 27302180,
-	 "extractor": lambda item: item["paypal"]["$overall"]["all"]},
+	 "extractor": lambda item: item["paypal"]["$overall"].get("0", {"all": 0})["all"] if "paypal" in item else 0},
 ]
 
 mixpanel_reports = []
