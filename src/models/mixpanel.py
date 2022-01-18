@@ -58,18 +58,14 @@ _mixpanel_reports = [
 																										  "all"]) * 100},
 	{"description": "% carte di credito aggiunte con successo", "id": 13913969},
 	{"description": "# carte di credito aggiunte nel wallet", "id": 15272532},
-	{"description": "% account Paypal aggiunti con successo", "id": 27301649,
-	 "extractor": lambda item: (item["successo"]["$overall"]["all"] / (
-			 (item["fallimento"]["$overall"]["all"] if 'fallimento' in item else 0) + item["successo"]["$overall"][
-		 "all"])) * 100},
-	{"description": "# account Paypal aggiunti nel wallet", "id": 27301649,
-	 "extractor": lambda item: item["successo"]["$overall"]["all"]},
+	{"description": "% account Paypal aggiunti con successo", "id": 27301649},
+	{"description": "# account Paypal aggiunti nel wallet", "id": 27704365},
 	{"description": "% verifica pagamento effettuata con successo", "id": 15352169,
 	 "extractor": lambda item: item["successo"]["all"]},
 	{"description": "% attivazione pagamento effettuata con successo", "id": 15352239,
 	 "extractor": lambda item: item["successo"]["all"]},
-	{"description": "# pagamenti effettuati con successo", "id": 27163336},
-	{"description": "% pagamenti effettuati con successo", "id": 26999327,
+	{"description": "# pagamenti effettuati con successo", "id": 13913965, "extractor":lambda item: item["pagamento effettuato con successo"]["$overall"]["all"]},
+	{"description": "% pagamenti effettuati con successo", "id": 27707760,
 	 "extractor": lambda item: item["successo"]["all"]},
 	{"description": "# pagamenti effettuati con carta di credito", "id": 27302180,
 	 "extractor": lambda item: item["carta di credito"].get("0", {"all": 0})[
