@@ -43,7 +43,7 @@ _mixpanel_reports = [
 	{"description": "# richieste di download dei dati del profilo", "id": 26787100},
 	{"description": "% di dispositivi con autenticazione biometrica", "id": 15212227},
 
-	{"description": "% utenti che abbandonano l'inserimento di un pagamento durante il checkout", "id": 26999381,
+	{"description": "% utenti che abbandonano un pagamento durante il checkout", "id": 26999381,
 	 "extractor": lambda item: item["interruzione"]["all"]},
 	{"description": "% utenti che abbandonano l'inserimento di una carta di credito durante il checkout",
 	 "id": 13913973},
@@ -58,7 +58,7 @@ _mixpanel_reports = [
 																										  "all"]) * 100},
 	{"description": "% carte di credito aggiunte con successo", "id": 13913969},
 	{"description": "# carte di credito aggiunte nel wallet", "id": 15272532},
-	{"description": "% account Paypal aggiunti con successo", "id": 27301649},
+	{"description": "% di successo in fase di checkout aggiunta Paypal", "id": 27301649},
 	{"description": "# account Paypal aggiunti nel wallet", "id": 27704365},
 	{"description": "% verifica pagamento effettuata con successo", "id": 15352169,
 	 "extractor": lambda item: item["successo"]["all"]},
@@ -67,11 +67,10 @@ _mixpanel_reports = [
 	{"description": "# pagamenti effettuati con successo", "id": 13913965, "extractor":lambda item: item["pagamento effettuato con successo"]["$overall"]["all"]},
 	{"description": "% pagamenti effettuati con successo", "id": 27707760,
 	 "extractor": lambda item: item["successo"]["all"]},
-	{"description": "# pagamenti effettuati con carta di credito", "id": 27302180,
-	 "extractor": lambda item: item["carta di credito"].get("0", {"all": 0})[
-		 "all"] if "carta di credito" in item else 0},
+	 {"description": "# pagamenti effettuati con carta di credito", "id": 27302180,
+	 "extractor": lambda item: item["carta di credito"]["all"]},
 	{"description": "# pagamenti effettuati con Paypal", "id": 27302180,
-	 "extractor": lambda item: item["paypal"]["$overall"].get("0", {"all": 0})["all"] if "paypal" in item else 0},
+	 "extractor": lambda item: item["paypal"]["all"]},
 
 ]
 
