@@ -1,12 +1,7 @@
 from typing import Callable, Union, Optional
 from models.report import Report
 from utils.format import format_number
-from utils.mixpanel import MixpanelDataRetriever
-
-
-def default_extractor(series):
-	first_key = list(series.keys())[0]
-	return series[first_key]["all"]
+from utils.mixpanel import MixpanelDataRetriever, mp_extract, default_extractor, mp_multiple_extract
 
 
 class MixpanelReport(Report):
@@ -44,33 +39,34 @@ _mixpanel_reports = [
 	{"description": "% di dispositivi con autenticazione biometrica", "id": 15212227},
 
 	{"description": "% utenti che abbandonano un pagamento durante il checkout", "id": 26999381,
-	 "extractor": lambda item: item["interruzione"]["all"]},
+	 "extractor": mp_extract("interruzione/all")},
 	{"description": "% utenti che abbandonano l'inserimento di una carta di credito durante il checkout",
 	 "id": 13913973},
-	{"description": "% sceglie la preferenza AUTOMATICA per i servizi", "id": 15507584},
-	{"description": "% che condivide i dati con Mixpanel", "id": 13828137, "extractor": lambda item: (item[
-																										  "MIXPANEL_SET_ENABLED - Unique"][
-																										  "true"][
-																										  "all"] /
-																									  item[
-																										  "MIXPANEL_SET_ENABLED - Unique"][
-																										  "$overall"][
-																										  "all"]) * 100},
+	{"description": "% di utenti che sceglie la preferenza AUTOMATICA per i servizi", "id": 15507584},
+	{"description": "% utenti che consente il tracking su Mixpanel", "id": 13828137, "extractor": lambda item: (item[
+																													"MIXPANEL_SET_ENABLED - Unique"][
+																													"true"][
+																													"all"] /
+																												item[
+																													"MIXPANEL_SET_ENABLED - Unique"][
+																													"$overall"][
+																													"all"]) * 100},
 	{"description": "% carte di credito aggiunte con successo", "id": 13913969},
 	{"description": "# carte di credito aggiunte nel wallet", "id": 15272532},
 	{"description": "% di successo in fase di checkout aggiunta Paypal", "id": 27301649},
 	{"description": "# account Paypal aggiunti nel wallet", "id": 27704365},
 	{"description": "% verifica pagamento effettuata con successo", "id": 15352169,
-	 "extractor": lambda item: item["successo"]["all"]},
+	 "extractor": mp_extract("successo/all")},
 	{"description": "% attivazione pagamento effettuata con successo", "id": 15352239,
-	 "extractor": lambda item: item["successo"]["all"]},
-	{"description": "# pagamenti effettuati con successo", "id": 13913965, "extractor":lambda item: item["pagamento effettuato con successo"]["$overall"]["all"]},
-	{"description": "% pagamenti effettuati con successo", "id": 27707760,
-	 "extractor": lambda item: item["successo"]["all"]},
-	 {"description": "# pagamenti effettuati con carta di credito", "id": 27302180,
-	 "extractor": lambda item: item["carta di credito"]["all"]},
+	 "extractor": mp_extract("successo/all")},
+	{"description": "# pagamenti effettuati con successo", "id": 13913965,
+	 "extractor": mp_extract("pagamento effettuato con successo/$overall/all")},
+	{"description": "% pagamenti che hanno successo in fase di checkout", "id": 27707760,
+	 "extractor": mp_extract("successo/all")},
+	{"description": "# pagamenti effettuati con carta di credito", "id": 27302180,
+	 "extractor": mp_extract("carta di credito/all")},
 	{"description": "# pagamenti effettuati con Paypal", "id": 27302180,
-	 "extractor": lambda item: item["paypal"]["all"]},
+	 "extractor": mp_extract("paypal/all")},
 
 ]
 
