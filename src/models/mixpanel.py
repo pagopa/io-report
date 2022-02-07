@@ -55,6 +55,7 @@ _mixpanel_reports = [
 	{"description": "# carte di credito aggiunte nel wallet", "id": 15272532},
 	{"description": "% di successo in fase di checkout aggiunta Paypal", "id": 27301649},
 	{"description": "# account Paypal aggiunti nel wallet", "id": 27704365},
+	{"description": "# strumenti di pagamento cancellati dal portafoglio", "id": 28033951, "extractor": mp_extract("successo/all")},
 	{"description": "% verifica pagamento effettuata con successo", "id": 15352169,
 	 "extractor": mp_extract("successo/all")},
 	{"description": "% attivazione pagamento effettuata con successo", "id": 15352239,
