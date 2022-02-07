@@ -13,21 +13,6 @@ def mp_extract(path):
 	return extract
 
 
-def mp_multiple_extract(*paths):
-	splitted_paths = map(lambda path: path.split("/"), paths)
-
-	def extract(item):
-		results = []
-		for splitted_path in splitted_paths:
-			curr_item = item
-			for r in splitted_path:
-				curr_item = curr_item[r]
-			results.append(curr_item)
-		return results
-
-	return extract
-
-
 def default_extractor(series):
 	first_key = list(series.keys())[0]
 	return series[first_key]["all"]
