@@ -37,6 +37,7 @@ _mixpanel_reports = [
 	{"description": "# richieste di cancellazione del profilo", "id": 26787097},
 	{"description": "# richieste di download dei dati del profilo", "id": 26787100},
 	{"description": "% di dispositivi con autenticazione biometrica", "id": 15212227},
+	{"description": "% di dispositivi con lock screen impostato (pin,segno,faceid,fingerprint)", "id": 28134364},
 
 	{"description": "% utenti che abbandonano un pagamento durante il checkout", "id": 26999381,
 	 "extractor": mp_extract("interruzione/all")},
@@ -55,7 +56,8 @@ _mixpanel_reports = [
 	{"description": "# carte di credito aggiunte nel wallet", "id": 15272532},
 	{"description": "% di successo in fase di checkout aggiunta Paypal", "id": 27301649},
 	{"description": "# account Paypal aggiunti nel wallet", "id": 27704365},
-	{"description": "# strumenti di pagamento cancellati dal portafoglio", "id": 28033951, "extractor": mp_extract("successo/all")},
+	{"description": "# strumenti di pagamento cancellati dal portafoglio", "id": 28033951,
+	 "extractor": mp_extract("successo/all")},
 	{"description": "% verifica pagamento effettuata con successo", "id": 15352169,
 	 "extractor": mp_extract("successo/all")},
 	{"description": "% attivazione pagamento effettuata con successo", "id": 15352239,
