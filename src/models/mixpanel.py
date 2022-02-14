@@ -34,6 +34,7 @@ _mixpanel_reports = [
 	{"description": "% login successo con CIE", "id": 15507536},
 	{"description": "# utenti attivi", "id": 13914117},
 	{"description": "# utenti attivi (loggati)", "id": 13850683},
+	{"description": "% della tipologia PAGAMENTO dei messaggi letti dagli utenti", "id": 28160628},
 	{"description": "# richieste di cancellazione del profilo", "id": 26787097},
 	{"description": "# richieste di download dei dati del profilo", "id": 26787100},
 	{"description": "% di dispositivi con autenticazione biometrica", "id": 15212227},
