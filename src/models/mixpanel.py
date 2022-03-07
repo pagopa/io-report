@@ -38,8 +38,7 @@ _mixpanel_reports = [
 	{"description": "# richieste di cancellazione del profilo", "id": 26787097},
 	{"description": "# richieste di download dei dati del profilo", "id": 26787100},
 	{"description": "% di dispositivi con autenticazione biometrica", "id": 15212227},
-	{"description": "% di dispositivi con lock screen impostato (pin,segno,faceid,fingerprint)", "id": 28134364},
-
+	{"description": "% di dispositivi con lock screen impostato (pin, segno, faceId, fingerprint)", "id": 28134364},
 	{"description": "% utenti che abbandonano un pagamento durante il checkout", "id": 26999381,
 	 "extractor": mp_extract("interruzione/all")},
 	{"description": "% utenti che abbandonano l'inserimento di una carta di credito durante il checkout",
@@ -71,7 +70,6 @@ _mixpanel_reports = [
 	 "extractor": mp_extract("carta di credito/all")},
 	{"description": "# pagamenti effettuati con Paypal", "id": 27302180,
 	 "extractor": mp_extract("paypal/all")},
-
 ]
 
 mixpanel_reports = []

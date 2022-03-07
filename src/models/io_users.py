@@ -6,5 +6,5 @@ class IOUsersReport(Report):
 
 	def load_data(self) -> any:
 		# don't know how to retrieve this data programmatically, PR welcome :D
-		self.data = format_number(15117635)
+		self.data = format_number(15378509)
 		return self.data
