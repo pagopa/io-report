@@ -16,7 +16,7 @@ slack_msgs = []
 
 # collect reports
 # io user report
-reports = [IOUsersReport("# utenti unici")]
+reports = [IOUsersReport("# cittadini che hanno effettuato l'accesso in IO (in assoluto)")]
 # mixpanel report
 reports.extend(mixpanel_reports)
 
