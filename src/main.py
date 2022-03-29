@@ -17,6 +17,7 @@ slack_msgs = []
 # collect reports
 # io user report
 io_user_report = IOUsersReport(f"# utenti che hanno effettuato l'accesso (dal *{week_ago.day}/{week_ago.month}*)")
+# pre-pend io_user_report as first element of users_section
 users_section.add_report(io_user_report, 0)
 
 for section in sections:
