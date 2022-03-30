@@ -35,13 +35,13 @@ def create_mixpanel_reports(reports):
 users_reports = [{"description": "installazioni avvenute nel periodo (fonte Mixpanel)", "id": 13850641},
 				 {"description": "login avvenuti con SPID", "id": 13850659},
 				 {"description": "login avvenuti con CIE", "id": 15507536},
-				 {"description": "utenti che hanno aperto l’app", "id": 13914117},
-				 {"description": "utenti che hanno aperto l'app e sono autenticati:", "id": 13850683}]
+				 {"description": "utenti hanno aperto l’app", "id": 13914117},
+				 {"description": "utenti hanno aperto l'app e sono autenticati:", "id": 13850683}]
 users_section = SectionReports(":blue-heart-io: *Accesso e Utenti*", create_mixpanel_reports(users_reports))
 
 # messages
 messages_reports = [
-	{"description": "di messaggi contenenti un avviso di pagamento, tra tutti quelli letti dagli utenti",
+	{"description": "messaggi contengono un avviso di pagamento, tra tutti quelli letti dagli utenti",
 	 "id": 28160628}]
 messages_section = SectionReports(":email: *Messaggi*", create_mixpanel_reports(messages_reports))
 
@@ -51,15 +51,15 @@ profiles_reports = [{"description": "richieste di cancellazione del profilo", "i
 profiles_section = SectionReports(":busts_in_silhouette: *Dati Profilo*", create_mixpanel_reports(profiles_reports))
 
 # devices
-devices_reports = [{"description": "di dispositivi che supportano l'autenticazione biometrica", "id": 15212227},
-				   {"description": "di dispositivi con lock screen impostato (pin, segno, faceId, fingerprint)",
+devices_reports = [{"description": "dispositivi che supportano l'autenticazione biometrica", "id": 15212227},
+				   {"description": "dispositivi con lock screen impostato (pin, segno, faceId, fingerprint)",
 					"id": 28134364}, ]
 devices_section = SectionReports(":iphone: *Dispositivi*", create_mixpanel_reports(devices_reports))
 
 # preferences
 preferences_reports = [
-	{"description": "di utenti che sceglie la configurazione rapida per i servizi", "id": 15507584},
-	{"description": "utenti che accettano il tracking su Mixpanel", "id": 13828137, "extractor": lambda item: (item[
+	{"description": "utenti scelgono la configurazione rapida per i servizi", "id": 15507584},
+	{"description": "utenti accettano il tracking su Mixpanel", "id": 13828137, "extractor": lambda item: (item[
 																													"MIXPANEL_SET_ENABLED - Unique"][
 																													"true"][
 																													"all"] /
@@ -70,9 +70,9 @@ preferences_reports = [
 preferences_section = SectionReports(":gear: *Preferenze*", create_mixpanel_reports(preferences_reports))
 
 # payments
-payments_reports = [{"description": "utenti che abbandonano un pagamento allo step finale", "id": 26999381,
+payments_reports = [{"description": "utenti abbandonano un pagamento allo step finale", "id": 26999381,
 					 "extractor": mp_extract("interruzione/all")},
-					{"description": "utenti che abbandonano l'inserimento di una carta di credito allo step finale",
+					{"description": "utenti abbandonano l'inserimento di una carta di credito allo step finale",
 					 "id": 13913973},
 					{"description": "verifica pagamento effettuata con successo", "id": 15352169,
 					 "extractor": mp_extract("successo/all")},
@@ -91,12 +91,12 @@ payments_reports = [{"description": "utenti che abbandonano un pagamento allo st
 payments_section = SectionReports(":moneybag: *Pagamenti*", create_mixpanel_reports(payments_reports))
 
 # credit cards
-credit_cards_reports = [{"description": "% carte di credito aggiunte", "id": 13913969},
+credit_cards_reports = [{"description": "carte di credito aggiunte", "id": 13913969},
 						{"description": "carte di credito aggiunte nel wallet", "id": 15272532}, ]
 credit_cards_section = SectionReports(":credit_card: *Carte di credito*", create_mixpanel_reports(credit_cards_reports))
 
 # paypal
-paypal_reports = [{"description": "di account PayPal aggiunti con successo allo step finale", "id": 27301649},
+paypal_reports = [{"description": "account PayPal aggiunti con successo allo step finale", "id": 27301649},
 				  {"description": "account Paypal aggiunti nel wallet nel periodo", "id": 27704365},
 				  {"description": "account Paypal aggiunti in totale", "id": 28797355}, ]
 paypal_section = SectionReports(":paypal: *Paypal*", create_mixpanel_reports(paypal_reports))
