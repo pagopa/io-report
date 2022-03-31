@@ -1,5 +1,5 @@
 from models.io_users import IOUsersReport
-from models.mixpanel import mixpanel_reports
+from models.mixpanel import sections, users_section
 from utils.slack import send_slack_message_blocks
 import datetime
 
@@ -16,16 +16,20 @@ slack_msgs = []
 
 # collect reports
 # io user report
-reports = [IOUsersReport("# cittadini che hanno effettuato l'accesso in IO (in assoluto)")]
-# mixpanel report
-reports.extend(mixpanel_reports)
+io_user_report = IOUsersReport(f"utenti hanno effettuato l'accesso (dal 16/04/2020)")
+# pre-pend io_user_report as first element of users_section
+users_section.add_report(io_user_report, 0)
 
-for r in reports:
-	print(f"requesting data for '{r.description}'...")
-	data = r.load_data()
-	if data is None:
-		raise IOError(f"cannot retrieve data for report '{r.description}'")
-	slack_msgs.append(f"- _{r.description}_: `{data}`")
+for idx, section in enumerate(sections):
+	if idx > 0:
+		slack_msgs.append("")  # empty line divider
+	slack_msgs.append(section.header)
+	for r in section.reports:
+		print(f"requesting data for '{r.description}'...")
+		data = r.load_data()
+		if data is None:
+			raise IOError(f"cannot retrieve data for report '{r.description}'")
+		slack_msgs.append(f"- `{data}` {r.description}")
 
 if len(slack_msgs):
 	send_slack_message_blocks([header])
