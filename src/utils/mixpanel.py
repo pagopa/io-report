@@ -22,8 +22,9 @@ def default_extractor(series):
 
 
 class MixpanelDataRetriever:
-	# seconds to sleep to make another attempt to try to retrieve data
+	# seconds to sleep before make another attempt to try to retrieve data
 	retry_delay = 2.0
+	# max attempts when a request fail. After that the request is considered failed
 	max_attempts = 3
 	project_id = 2460815
 	# see https://eu.mixpanel.com/report/2460815/settings/#project/2460815/serviceaccounts
