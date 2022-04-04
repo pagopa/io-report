@@ -36,7 +36,7 @@ users_reports = [{"description": "installazioni avvenute nel periodo (fonte Mixp
 				 {"description": "login avvenuti con SPID", "id": 13850659},
 				 {"description": "login avvenuti con CIE", "id": 15507536},
 				 {"description": "utenti hanno aperto l’app", "id": 13914117},
-				 {"description": "utenti hanno aperto l'app e sono autenticati:", "id": 13850683}]
+				 {"description": "utenti hanno aperto l'app e sono autenticati", "id": 13850683}]
 users_section = SectionReports(":blue-heart-io: *Accesso e Utenti*", create_mixpanel_reports(users_reports))
 
 # messages
