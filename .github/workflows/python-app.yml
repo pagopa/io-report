@@ -26,5 +26,8 @@ jobs:
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Run IO-Report
+      env:
+        MIXPANEL_SERVICE_TOKEN: ${{ secrets.MIXPANEL_SERVICE_TOKEN }}
+        SLACK_WEB_HOOK_TEST: ${{ secrets.SLACK_WEB_HOOK_TEST }}
       run: |
         python src/main.py
