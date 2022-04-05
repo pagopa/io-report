@@ -37,5 +37,6 @@ jobs:
       env:
         MIXPANEL_SERVICE_TOKEN: '${{ secrets.MIXPANEL_SERVICE_TOKEN }}'
         SLACK_WEB_HOOK_TEST: '${{ secrets.SLACK_WEB_HOOK_TEST }}'
+        SLACK_WEB_HOOK: '${{ secrets.SLACK_WEB_HOOK }}'
       run: |
         python src/main.py
