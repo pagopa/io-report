@@ -46,11 +46,14 @@ class MixpanelDataRetriever:
 				response = requests.request("GET",
 											MixpanelDataRetriever.url + f"&bookmark_id={mixpanel_report.report_id}",
 											headers=MixpanelDataRetriever.headers)
+				print("test",f"**{len(MixpanelDataRetriever.mixpanel_token)}**")
 				data = response.json()
 				series = data["series"]
 				value = mixpanel_report.data_extractor(series)
 				return value
 			except:
+				import traceback
+				traceback.print_exc()
 				sleep(MixpanelDataRetriever.retry_delay)
 		print(f"cant load mixpanel report '{mixpanel_report.description}'")
 		return None

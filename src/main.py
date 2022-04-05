@@ -26,6 +26,4 @@ for idx, section in enumerate(sections):
 
 if len(slack_msgs):
 	send_slack_message_blocks([header])
-	send_slack_message_blocks([
-                              f"utenti hanno effettuato l'accesso (dal 16/04/2020) - invia un messaggio contenente questa stringa `/iostats` in qualsiasi chat qui su Slack"])
 	send_slack_message_blocks(["\n".join(slack_msgs)])
