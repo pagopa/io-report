@@ -51,6 +51,8 @@ class MixpanelDataRetriever:
 				value = mixpanel_report.data_extractor(series)
 				return value
 			except:
+				import traceback
+				traceback.print_exc()
 				sleep(MixpanelDataRetriever.retry_delay)
 		print(f"cant load mixpanel report '{mixpanel_report.description}'")
 		return None
