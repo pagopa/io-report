@@ -46,6 +46,7 @@ class MixpanelDataRetriever:
 				response = requests.request("GET",
 											MixpanelDataRetriever.url + f"&bookmark_id={mixpanel_report.report_id}",
 											headers=MixpanelDataRetriever.headers)
+				print(response.status_code)
 				data = response.json()
 				series = data["series"]
 				value = mixpanel_report.data_extractor(series)
