@@ -5,7 +5,7 @@ name: IO report
 
 on:
   schedule:
-    - cron: '30 9 * * 1'
+    - cron: '48 8 * * 1'
 
 permissions:
   contents: read
