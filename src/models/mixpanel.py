@@ -1,7 +1,7 @@
-from typing import Callable, Union, Optional, List
-from models.report import Report, SectionReports
+from typing import Callable, Union, Optional
+from models.report import Report
 from utils.format import format_number
-from utils.mixpanel import MixpanelDataRetriever, mp_extract, default_extractor
+from utils.mixpanel import MixpanelDataRetriever, default_extractor
 
 
 class MixpanelReport(Report):
