@@ -18,11 +18,14 @@ for idx, section in enumerate(sections):
 		slack_msgs.append("")  # empty line divider
 	slack_msgs.append(section.header)
 	for r in section.reports:
-		print(f"requesting data for '{r.description}'...")
+		print(f"requesting data for '{r.description or 'n/a'}'...")
 		data = r.load_data()
 		if data is None:
 			raise IOError(f"cannot retrieve data for report '{r.description}'")
-		slack_msgs.append(f"- `{data}` {r.description}")
+		if section.auto_format:
+			slack_msgs.append(f"- `{data}` {r.description}")
+		else:
+			slack_msgs.append(f"{data}")
 
 if len(slack_msgs):
 	send_slack_message_blocks([header])
