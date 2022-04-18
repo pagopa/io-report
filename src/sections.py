@@ -83,13 +83,15 @@ def assistance_categories(data):
     del categories["$overall"]
     # sort categories in DESC order
     sorted_categories = sorted(categories, key=lambda k: categories[k]["all"], reverse=True)
-
+    total_tickets = sum(c['all'] for c in categories.values())
+    slack_msg = f"- `{format_number(total_tickets)}` tickets aperti nel periodo"
     msg = []
     for cat in sorted_categories[:4]:
         amount = categories[cat]["all"]
         percentage = format_number((amount / total) * 100.0)
         msg.append(f"{format_number(amount)} ({percentage}) - {cat.replace('_',' ')}")
-    return "principali categorie per cui il cittadino richiede assistenza\n```" + "\n".join(msg) + "```"
+    slack_msg += "\n- principali categorie per cui il cittadino richiede assistenza\n```" + "\n".join(msg) + "```"
+    return slack_msg
 
 
 assistance_reports = [{"description": None, "id": 29338884, "extractor": assistance_categories}]
