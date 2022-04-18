@@ -86,8 +86,9 @@ def assistance_categories(data):
 
     msg = []
     for cat in sorted_categories[:4]:
-        percentage = format_number((categories[cat]["all"] / total) * 100.0)
-        msg.append(f"{percentage} {cat.replace('_',' ')}")
+        amount = categories[cat]["all"]
+        percentage = format_number((amount / total) * 100.0)
+        msg.append(f"{format_number(amount)} ({percentage}) - {cat.replace('_',' ')}")
     return "principali categorie per cui il cittadino richiede assistenza\n```" + "\n".join(msg) + "```"
 
 
