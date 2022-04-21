@@ -1,5 +1,5 @@
 # description
-This tool collects some data about the IO usage and [sends them to a Slack channel](https://pagopaspa.slack.com/archives/CQVJ1JES2/p1638780664485600) [every Monday at about 9.00am](.github/workflows/python-app.yml)
+This tool collects some data about the IO usage and sends them to a Slack channel [every Monday at about 9.00am](.github/workflows/python-app.yml)
 <img src="img/report.jpg" height="600" />
 
 # setup
