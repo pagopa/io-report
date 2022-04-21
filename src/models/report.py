@@ -1,5 +1,5 @@
 import abc
-from typing import Union, List
+from typing import Union, List, Optional
 
 
 class Report(metaclass=abc.ABCMeta):
@@ -10,26 +10,27 @@ class Report(metaclass=abc.ABCMeta):
     """
 
     def __init__(self, description: str):
-        self.data: Union[float, int, str, None] = None
+        self.report: Optional[str] = None
         self.description: str = description
 
     @abc.abstractmethod
-    def load_data(self) -> Union[float, int, str, None]:
-        raise NotImplementedError("you should implement 'load_data' method in your class!")
+    def load_report(self) -> Union[str, None]:
+        raise NotImplementedError("you should implement 'load_report' method in your class!")
 
 
 class SectionReports:
     """
         SectionReports
-        represents a sections of reports with an header as a section description
+        represents a section of reports with an header as a section description
         :param header describes the section
         :param reports a list of reports
     """
 
-    def __init__(self, header: str, reports: List[Report] = [], auto_format=True):
+    def __init__(self, header: str, reports=None):
+        if reports is None:
+            reports = []
         self.header = header
         self.reports = reports
-        self.auto_format = auto_format
 
     def add_report(self, report: Report, index: int):
         self.reports.insert(index, report)

@@ -1,102 +1,104 @@
 from typing import List
-from models.mixpanel import create_mixpanel_reports
+
+from models.mixpanel import MixpanelReport
 from models.report import SectionReports
 from utils.format import format_number
 from utils.mixpanel import mp_extract
 
 # users
 users_reports = [
-    {"description": "installazioni avvenute nel periodo (fonte Mixpanel)", "id": 13850641},
-    {"description": "login avvenuti con SPID", "id": 13850659},
-    {"description": "login avvenuti con CIE", "id": 15507536},
-    {"description": "utenti hanno aperto l’app", "id": 13914117},
-    {"description": "utenti hanno aperto l'app e sono autenticati", "id": 13850683}]
-users_section = SectionReports(":blue-heart-io: *Accesso e Utenti*", create_mixpanel_reports(users_reports))
+	MixpanelReport("installazioni avvenute nel periodo (fonte Mixpanel)", 13850641),
+	MixpanelReport("login avvenuti con SPID", 13850659),
+	MixpanelReport("login avvenuti con CIE", 15507536),
+	MixpanelReport("utenti hanno aperto l’app", 13914117),
+	MixpanelReport("utenti hanno aperto l'app e sono autenticati", 13850683)]
+users_section = SectionReports(":blue-heart-io: *Accesso e Utenti*", users_reports)
 
 # messages
 messages_reports = [
-    {"description": "messaggi contengono un avviso di pagamento, tra tutti quelli letti dagli utenti",
-     "id": 28160628}]
-messages_section = SectionReports(":email: *Messaggi*", create_mixpanel_reports(messages_reports))
+	MixpanelReport("messaggi contengono un avviso di pagamento, tra tutti quelli letti dagli utenti",
+	               28160628)]
+messages_section = SectionReports(":email: *Messaggi*", messages_reports)
 
 # profiles
-profiles_reports = [{"description": "richieste di cancellazione del profilo", "id": 26787097},
-                    {"description": "richieste di download dei dati del profilo", "id": 26787100}, ]
-profiles_section = SectionReports(":busts_in_silhouette: *Dati Profilo*", create_mixpanel_reports(profiles_reports))
+profiles_reports = [MixpanelReport("richieste di cancellazione del profilo", 26787097),
+                    MixpanelReport("richieste di download dei dati del profilo", 26787100), ]
+profiles_section = SectionReports(":busts_in_silhouette: *Dati Profilo*", profiles_reports)
 
 # devices
-devices_reports = [{"description": "dispositivi che supportano l'autenticazione biometrica", "id": 15212227},
-                   {"description": "dispositivi con lock screen impostato (pin, segno, faceId, fingerprint)",
-                    "id": 28134364}, ]
-devices_section = SectionReports(":iphone: *Dispositivi*", create_mixpanel_reports(devices_reports))
+devices_reports = [MixpanelReport("dispositivi che supportano l'autenticazione biometrica", 15212227),
+                   MixpanelReport("dispositivi con lock screen impostato (pin, segno, faceId, fingerprint)",
+                                  28134364)]
+devices_section = SectionReports(":iphone: *Dispositivi*", devices_reports)
 
 # preferences
 preferences_reports = [
-    {"description": "utenti scelgono la configurazione rapida per i servizi", "id": 15507584},
-    {"description": "utenti accettano il tracking su Mixpanel", "id": 13828137, "extractor": lambda item: (item[
-                                                                                                               "MIXPANEL_SET_ENABLED - Unique"][
-                                                                                                               "true"][
-                                                                                                               "all"] /
-                                                                                                           item[
-                                                                                                               "MIXPANEL_SET_ENABLED - Unique"][
-                                                                                                               "$overall"][
-                                                                                                               "all"]) * 100}, ]
-preferences_section = SectionReports(":gear: *Preferenze*", create_mixpanel_reports(preferences_reports))
+	MixpanelReport("utenti scelgono la configurazione rapida per i servizi", 15507584),
+	MixpanelReport("utenti accettano il tracking su Mixpanel", 13828137, extractor=lambda item: (item[
+		                                                                                             "MIXPANEL_SET_ENABLED - Unique"][
+		                                                                                             "true"][
+		                                                                                             "all"] /
+	                                                                                             item[
+		                                                                                             "MIXPANEL_SET_ENABLED - Unique"][
+		                                                                                             "$overall"][
+		                                                                                             "all"]) * 100)]
+preferences_section = SectionReports(":gear: *Preferenze*", preferences_reports)
 
 # payments
-payments_reports = [{"description": "utenti abbandonano un pagamento allo step finale", "id": 26999381,
-                     "extractor": mp_extract("interruzione/all")},
-                    {"description": "utenti abbandonano l'inserimento di una carta di credito allo step finale",
-                     "id": 13913973},
-                    {"description": "verifica pagamento effettuata con successo", "id": 15352169,
-                     "extractor": mp_extract("successo/all")},
-                    {"description": "attivazione pagamento effettuata con successo", "id": 15352239,
-                     "extractor": mp_extract("successo/all")},
-                    {"description": "pagamenti effettuati con successo", "id": 13913965,
-                     "extractor": mp_extract("pagamento effettuato con successo/$overall/all")},
-                    {"description": "pagamenti effettuati con successo", "id": 27707760,
-                     "extractor": mp_extract("successo/all")},
-                    {"description": "pagamenti effettuati con carta di credito", "id": 27302180,
-                     "extractor": mp_extract("carta di credito/all")},
-                    {"description": "pagamenti effettuati con Paypal", "id": 27302180,
-                     "extractor": mp_extract("paypal/all")},
-                    {"description": "strumenti di pagamento eliminati dal portafoglio", "id": 28033951,
-                     "extractor": mp_extract("successo/all")}, ]
-payments_section = SectionReports(":moneybag: *Pagamenti*", create_mixpanel_reports(payments_reports))
+payments_reports = [MixpanelReport("utenti abbandonano un pagamento allo step finale", 26999381,
+                                   extractor=mp_extract("interruzione/all")),
+                    MixpanelReport("utenti abbandonano l'inserimento di una carta di credito allo step finale",
+                                   13913973),
+                    MixpanelReport("verifica pagamento effettuata con successo", 15352169,
+                                   extractor=mp_extract("successo/all")),
+                    MixpanelReport("attivazione pagamento effettuata con successo", 15352239,
+                                   extractor=mp_extract("successo/all")),
+                    MixpanelReport("pagamenti effettuati con successo", 13913965,
+                                   extractor=mp_extract("pagamento effettuato con successo/$overall/all")),
+                    MixpanelReport("pagamenti effettuati con successo", 27707760,
+                                   extractor=mp_extract("successo/all")),
+                    MixpanelReport("pagamenti effettuati con carta di credito", 27302180,
+                                   extractor=mp_extract("carta di credito/all")),
+                    MixpanelReport("pagamenti effettuati con Paypal", 27302180,
+                                   extractor=mp_extract("paypal/all")),
+                    MixpanelReport("strumenti di pagamento eliminati dal portafoglio", 28033951,
+                                   extractor=mp_extract("successo/all"))]
+payments_section = SectionReports(":moneybag: *Pagamenti*", payments_reports)
 
 # credit cards
-credit_cards_reports = [{"description": "carte di credito aggiunte con successo", "id": 13913969},
-                        {"description": "carte di credito aggiunte nel wallet", "id": 15272532}, ]
-credit_cards_section = SectionReports(":credit_card: *Carte di credito*", create_mixpanel_reports(credit_cards_reports))
+credit_cards_reports = [MixpanelReport("carte di credito aggiunte con successo", 13913969),
+                        MixpanelReport("carte di credito aggiunte nel wallet", 15272532)]
+credit_cards_section = SectionReports(":credit_card: *Carte di credito*", credit_cards_reports)
 
 # paypal
-paypal_reports = [{"description": "account PayPal aggiunti con successo allo step finale", "id": 27301649},
-                  {"description": "account Paypal aggiunti nel wallet nel periodo", "id": 27704365},
-                  {"description": "account Paypal aggiunti in totale", "id": 28797355}, ]
-paypal_section = SectionReports(":paypal: *Paypal*", create_mixpanel_reports(paypal_reports))
+paypal_reports = [MixpanelReport("account PayPal aggiunti con successo allo step finale", 27301649),
+                  MixpanelReport("account Paypal aggiunti nel wallet nel periodo", 27704365),
+                  MixpanelReport("account Paypal aggiunti in totale", 28797355)]
+paypal_section = SectionReports(":paypal: *Paypal*", paypal_reports)
 
 
 # assistance
-def assistance_categories(data):
-    categories = data[list(data.keys())[0]]
-    total = categories["$overall"]["all"]
-    del categories["$overall"]
-    # sort categories in DESC order
-    sorted_categories = sorted(categories, key=lambda k: categories[k]["all"], reverse=True)
-    total_tickets = sum(c['all'] for c in categories.values())
-    slack_msg = f"- `{format_number(total_tickets)}` tickets aperti nel periodo"
-    msg = []
-    for cat in sorted_categories[:4]:
-        amount = categories[cat]["all"]
-        percentage = format_number((amount / total) * 100.0)
-        msg.append(f"{format_number(amount)} ({percentage}) - {cat.replace('_',' ')}")
-    slack_msg += "\n- principali categorie per cui il cittadino richiede assistenza\n```" + "\n".join(msg) + "```"
-    return slack_msg
+def assistance_formatter(data):
+	categories = data[list(data.keys())[0]]
+	total = categories["$overall"]["all"]
+	del categories["$overall"]
+	# sort categories in DESC order
+	sorted_categories = sorted(categories, key=lambda k: categories[k]["all"], reverse=True)
+	total_tickets = sum(c['all'] for c in categories.values())
+	slack_msg = f"- `{format_number(total_tickets)}` tickets aperti nel periodo"
+	msg = []
+	for cat in sorted_categories[:4]:
+		amount = categories[cat]["all"]
+		percentage = format_number((amount / total) * 100.0)
+		msg.append(f"{format_number(amount)} ({percentage}) - {cat.replace('_', ' ')}")
+	slack_msg += "\n- principali categorie per cui il cittadino richiede assistenza\n```" + "\n".join(msg) + "```"
+	return slack_msg
 
 
-assistance_reports = [{"description": None, "id": 29338884, "extractor": assistance_categories}]
+assistance_reports = [MixpanelReport("categoria per cui si richiede assistenza", 29338884, extractor=lambda x: x,
+                                     formatter=assistance_formatter)]
 assistance_section = SectionReports(":information_desk_person::skin-tone-2: *Assistenza*",
-                                    create_mixpanel_reports(assistance_reports), False)
+                                    assistance_reports)
 
 sections: List[SectionReports] = [users_section, messages_section, profiles_section, devices_section,
                                   preferences_section, payments_section,
