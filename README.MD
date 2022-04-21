@@ -19,9 +19,19 @@ example:<br/>
 ### how to add a report
 - create you own report class by extending the base [Report](src/models/report.py)
 
-<img src="img/my_report.png" />
+```python
+class FancyReport(Report):
 
-- add your reports to the [main list](src/main.py) 
+	def load_report(self) -> Union[str, None]:
+		return "42 - Answer to the Ultimate Question of Life, the Universe, and Everything"
+
+
+life_section = SectionReports("✨ *Life Mystery*",
+                                    [FancyReport("most important answer")])
+```
+then add the `life_section` to the [sections list](src/main.py)
+
+<img src="img/my_report.jpg" />
 
 ### requirements
 It needs a Python interpreter version >= 3.5
