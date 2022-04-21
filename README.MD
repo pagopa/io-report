@@ -30,7 +30,7 @@ life_section = SectionReports("✨ *Life Mystery*",
 ```
 then add the `life_section` to the [sections list](src/main.py)
 
-<img src="img/my_report.jpg" />
+<img src="img/my_report.png" />
 
 ### requirements
 It needs a Python interpreter version >= 3.5
