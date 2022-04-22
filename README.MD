@@ -1,6 +1,5 @@
 # description
-This tool collects some data about the IO usage and [sends them to a Slack channel](https://pagopaspa.slack.com/archives/CQVJ1JES2/p1638780664485600)
-
+This tool collects some data about the IO usage and sends them to a Slack channel [every Monday at about 9.00am](.github/workflows/python-app.yml)
 <img src="img/report.jpg" height="600" />
 
 # setup
@@ -19,9 +18,19 @@ example:<br/>
 ### how to add a report
 - create you own report class by extending the base [Report](src/models/report.py)
 
-<img src="img/my_report.png" />
+```python
+class FancyReport(Report):
 
-- add your reports to the [main list](src/main.py) 
+	def load_report(self) -> Union[str, None]:
+		return "42 - Answer to the Ultimate Question of Life, the Universe, and Everything"
+
+
+life_section = SectionReports("✨ *Life Mystery*",
+                                    [FancyReport("most important answer")])
+```
+then add the `life_section` to the [sections list](src/main.py)
+
+<img src="img/my_report.png" />
 
 ### requirements
 It needs a Python interpreter version >= 3.5

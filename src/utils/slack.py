@@ -16,6 +16,7 @@ def get_slack_markdown_message(markdown_text):
 		}
 	}
 
+
 def send_slack_message_blocks(blocks):
 	try:
 		block_slice = 10

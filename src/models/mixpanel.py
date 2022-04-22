@@ -1,4 +1,5 @@
-from typing import Callable, Union, Optional
+from typing import Any, Union
+
 from models.report import Report
 from utils.format import format_number
 from utils.mixpanel import MixpanelDataRetriever, default_extractor
@@ -9,25 +10,22 @@ class MixpanelReport(Report):
 	MixpanelReport
 	dedicated report for mixpanel
 	:param report_id identifies the relative report in Mixpanel
-	:param data_extractor extracts the data in a specific position in the mixpanel payload
-	:type report_id: int
-	:type data_extractor: Callable
+	:type kwargs, could contain
+		- extractor: a function that accepts a payload and returns some data
+		- formatter: a function that accepts some data and returns a string
 	"""
 
-	def __init__(self, description, report_id: int, data_extractor: Union[
-		Optional[Callable]] = default_extractor):
+	def __init__(self, description, report_id: int, **kwargs):
 		super(MixpanelReport, self).__init__(description)
 		self.report_id = report_id
-		self.data_extractor = default_extractor if data_extractor is None else data_extractor
+		self.data_extractor = kwargs.get("extractor", default_extractor)
+		self.formatter = kwargs.get("formatter", self.slack_formatter)
 
-	def load_data(self):
-		self.data = MixpanelDataRetriever.load_mixpanel_report(self)
-		if self.data:
-			self.data = format_number(self.data)
-		return self.data
+	def slack_formatter(self, data: Any) -> str:
+		return f"- `{format_number(data)}` {self.description}"
 
-
-def create_mixpanel_reports(reports):
-	return list(map(lambda item: MixpanelReport(item["description"], item["id"], item.get("extractor", None)), reports))
-
-
+	def load_report(self) -> Union[str, None]:
+		data = MixpanelDataRetriever.load_mixpanel_report(self)
+		if data is None:
+			return None
+		return self.formatter(data)
