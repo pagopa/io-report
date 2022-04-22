@@ -20,6 +20,9 @@ for idx, section in enumerate(sections):
 	for r in section.reports:
 		print(f"requesting data for '{r.description or 'n/a'}'...")
 		report = r.load_report()
+		if report is None:
+			print(f"cant get data from report '{r.description or 'n/a'}'")
+			exit(1)
 		slack_msgs.append(report)
 
 if len(slack_msgs):

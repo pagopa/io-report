@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Union
 
 from models.report import Report
 from utils.format import format_number
@@ -14,15 +14,18 @@ class MixpanelReport(Report):
 		- extractor: a function that accepts a payload and returns some data
 		- formatter: a function that accepts some data and returns a string
 	"""
+
 	def __init__(self, description, report_id: int, **kwargs):
 		super(MixpanelReport, self).__init__(description)
 		self.report_id = report_id
 		self.data_extractor = kwargs.get("extractor", default_extractor)
-		self.formatter = kwargs.get("formatter", self.default_formatter)
+		self.formatter = kwargs.get("formatter", self.slack_formatter)
 
-	def default_formatter(self, data: Any) -> str:
+	def slack_formatter(self, data: Any) -> str:
 		return f"- `{format_number(data)}` {self.description}"
 
-	def load_report(self):
+	def load_report(self) -> Union[str, None]:
 		data = MixpanelDataRetriever.load_mixpanel_report(self)
+		if data is None:
+			return None
 		return self.formatter(data)
