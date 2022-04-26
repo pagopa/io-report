@@ -58,13 +58,13 @@ payments_reports = [MixpanelReport("utenti abbandonano un pagamento allo step fi
                     MixpanelReport("percentuale di autorizzazioni 3DS andate a buon fine", 27707760,
                                    extractor=mp_extract("successo/all")),
                     MixpanelReport("pagamenti effettuati con carte", 27302180,
-                                   extractor=mp_extract("carte/all")),
+                                   extractor=mp_extract("carta di credito/all")),
                     MixpanelReport("pagamenti effettuati con Paypal", 27302180,
                                    extractor=mp_extract("paypal/all")),
 					MixpanelReport("percentuale pagamenti conclusi con successo allo step finale usando Paypal", 29544467,
                                    extractor=mp_extract("paypal/all")),
 					MixpanelReport("percentuale pagamenti conclusi con successo allo step finale usando carte", 29544467,
-                                   extractor=mp_extract("carte/all")),
+                                   extractor=mp_extract("carta di credito/all")),
                     MixpanelReport("strumenti di pagamento eliminati dal portafoglio", 28033951,
                                    extractor=mp_extract("successo/all"))]
 payments_section = SectionReports(":moneybag: *Pagamenti*", payments_reports)
