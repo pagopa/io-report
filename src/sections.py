@@ -10,7 +10,7 @@ users_reports = [
 	MixpanelReport("installazioni avvenute nel periodo (fonte Mixpanel)", 13850641),
 	MixpanelReport("login avvenuti con SPID", 13850659),
 	MixpanelReport("login avvenuti con CIE", 15507536),
-	MixpanelReport("utenti hanno aperto l’app", 13914117),
+	MixpanelReport("utenti hanno aperto l'app", 13914117),
 	MixpanelReport("utenti hanno aperto l'app e sono autenticati", 13850683)]
 users_section = SectionReports(":blue-heart-io: *Accesso e Utenti*", users_reports)
 
@@ -53,20 +53,24 @@ payments_reports = [MixpanelReport("utenti abbandonano un pagamento allo step fi
                                    extractor=mp_extract("successo/all")),
                     MixpanelReport("attivazione pagamento effettuata con successo", 15352239,
                                    extractor=mp_extract("successo/all")),
-                    MixpanelReport("pagamenti effettuati con successo", 13913965,
+                    MixpanelReport("pagamenti effettuati con successo allo step finale", 13913965,
                                    extractor=mp_extract("pagamento effettuato con successo/$overall/all")),
-                    MixpanelReport("pagamenti effettuati con successo", 27707760,
+                    MixpanelReport("pagamenti effettuati con successo allo step finale", 27707760,
                                    extractor=mp_extract("successo/all")),
                     MixpanelReport("pagamenti effettuati con carta di credito", 27302180,
                                    extractor=mp_extract("carta di credito/all")),
                     MixpanelReport("pagamenti effettuati con Paypal", 27302180,
                                    extractor=mp_extract("paypal/all")),
+					MixpanelReport("pagamenti effettuati con Paypal allo step finale", 29544467,
+                                   extractor=mp_extract("paypal/all")),
+					MixpanelReport("pagamenti effettuati con carta di credito allo step finale", 29544467,
+                                   extractor=mp_extract("carta di credito/all")),
                     MixpanelReport("strumenti di pagamento eliminati dal portafoglio", 28033951,
                                    extractor=mp_extract("successo/all"))]
 payments_section = SectionReports(":moneybag: *Pagamenti*", payments_reports)
 
 # credit cards
-credit_cards_reports = [MixpanelReport("carte di credito aggiunte con successo", 13913969),
+credit_cards_reports = [MixpanelReport("carte di credito aggiunte con successo allo step finale", 13913969),
                         MixpanelReport("carte di credito aggiunte nel wallet", 15272532)]
 credit_cards_section = SectionReports(":credit_card: *Carte di credito*", credit_cards_reports)
 
@@ -87,7 +91,7 @@ def assistance_formatter(data):
 	total_tickets = sum(c['all'] for c in categories.values())
 	slack_msg = f"- `{format_number(total_tickets)}` tickets aperti nel periodo"
 	msg = []
-	for cat in sorted_categories[:4]:
+	for cat in sorted_categories[:6]:
 		amount = categories[cat]["all"]
 		percentage = format_number((amount / total) * 100.0)
 		msg.append(f"{format_number(amount)} ({percentage}) - {cat.replace('_', ' ')}")
@@ -103,3 +107,4 @@ assistance_section = SectionReports(":information_desk_person::skin-tone-2: *Ass
 sections: List[SectionReports] = [users_section, messages_section, profiles_section, devices_section,
                                   preferences_section, payments_section,
                                   credit_cards_section, paypal_section, assistance_section]
+
