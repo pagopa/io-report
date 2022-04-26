@@ -47,7 +47,7 @@ preferences_section = SectionReports(":gear: *Preferenze*", preferences_reports)
 # payments
 payments_reports = [MixpanelReport("utenti abbandonano un pagamento allo step finale", 26999381,
                                    extractor=mp_extract("interruzione/all")),
-                    MixpanelReport("utenti abbandonano l'inserimento di una carta di credito allo step finale",
+                    MixpanelReport("utenti abbandonano l'inserimento di una carta allo step finale",
                                    13913973),
                     MixpanelReport("verifica pagamento effettuata con successo", 15352169,
                                    extractor=mp_extract("successo/all")),
@@ -57,22 +57,22 @@ payments_reports = [MixpanelReport("utenti abbandonano un pagamento allo step fi
                                    extractor=mp_extract("pagamento effettuato con successo/$overall/all")),
                     MixpanelReport("percentuale di autorizzazioni 3DS andate a buon fine", 27707760,
                                    extractor=mp_extract("successo/all")),
-                    MixpanelReport("pagamenti effettuati con carta di credito", 27302180,
-                                   extractor=mp_extract("carta di credito/all")),
+                    MixpanelReport("pagamenti effettuati con carte", 27302180,
+                                   extractor=mp_extract("carte/all")),
                     MixpanelReport("pagamenti effettuati con Paypal", 27302180,
                                    extractor=mp_extract("paypal/all")),
 					MixpanelReport("percentuale pagamenti conclusi con successo allo step finale usando Paypal", 29544467,
                                    extractor=mp_extract("paypal/all")),
-					MixpanelReport("percentuale pagamenti conclusi con successo allo step finale usando carta di credito", 29544467,
-                                   extractor=mp_extract("carta di credito/all")),
+					MixpanelReport("percentuale pagamenti conclusi con successo allo step finale usando carte", 29544467,
+                                   extractor=mp_extract("carte/all")),
                     MixpanelReport("strumenti di pagamento eliminati dal portafoglio", 28033951,
                                    extractor=mp_extract("successo/all"))]
 payments_section = SectionReports(":moneybag: *Pagamenti*", payments_reports)
 
 # credit cards
-credit_cards_reports = [MixpanelReport("carte di credito aggiunte con successo allo step finale", 13913969),
-                        MixpanelReport("carte di credito aggiunte nel wallet", 15272532)]
-credit_cards_section = SectionReports(":credit_card: *Carte di credito*", credit_cards_reports)
+credit_cards_reports = [MixpanelReport("carte aggiunte con successo allo step finale", 13913969),
+                        MixpanelReport("carte aggiunte nel wallet", 15272532)]
+credit_cards_section = SectionReports(":credit_card: *Carte di debito, credito, prepagate*", credit_cards_reports)
 
 # paypal
 paypal_reports = [MixpanelReport("account PayPal aggiunti con successo allo step finale", 27301649),
