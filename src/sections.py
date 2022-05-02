@@ -61,10 +61,18 @@ payments_reports = [MixpanelReport("utenti abbandonano un pagamento allo step fi
                                    extractor=mp_extract("carta di credito/all")),
                     MixpanelReport("pagamenti effettuati con Paypal", 27302180,
                                    extractor=mp_extract("paypal/all")),
-					MixpanelReport("percentuale pagamenti conclusi con successo allo step finale usando Paypal", 29544467,
-                                   extractor=mp_extract("paypal/all")),
-					MixpanelReport("percentuale pagamenti conclusi con successo allo step finale usando carte", 29544467,
+                    MixpanelReport("pagamenti effettuati con Bancomat Pay", 27302180,
+                                   extractor=mp_extract("bancomat pay/all")),
+
+                    MixpanelReport("percentuale pagamenti conclusi con successo allo step finale usando carte",
+                                   29544467,
                                    extractor=mp_extract("carta di credito/all")),
+                    MixpanelReport("percentuale pagamenti conclusi con successo allo step finale usando Paypal",
+                                   29544467,
+                                   extractor=mp_extract("paypal/all")),
+                    MixpanelReport("percentuale pagamenti conclusi con successo allo step finale usando Bancomat Pay",
+                                   29544467,
+                                   extractor=mp_extract("bancomat pay/all")),
                     MixpanelReport("strumenti di pagamento eliminati dal portafoglio", 28033951,
                                    extractor=mp_extract("successo/all"))]
 payments_section = SectionReports(":moneybag: *Pagamenti*", payments_reports)
@@ -104,7 +112,12 @@ assistance_reports = [MixpanelReport("categoria per cui si richiede assistenza",
 assistance_section = SectionReports(":information_desk_person::skin-tone-2: *Assistenza*",
                                     assistance_reports)
 
+# bancomat pay
+bpay_reports = [MixpanelReport("Bancomat Pay aggiunti in totale", 29553379),
+                MixpanelReport("Bancomat Pay aggiunti nel periodo", 29667527)]
+bpay_section = SectionReports(":bpay: *Bancomat Pay*", bpay_reports)
+
 sections: List[SectionReports] = [users_section, messages_section, profiles_section, devices_section,
                                   preferences_section, payments_section,
-                                  credit_cards_section, paypal_section, assistance_section]
+                                  credit_cards_section, paypal_section, bpay_section, assistance_section]
 
