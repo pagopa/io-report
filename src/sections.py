@@ -11,7 +11,11 @@ users_reports = [
 	MixpanelReport("login avvenuti con SPID", 13850659),
 	MixpanelReport("login avvenuti con CIE", 15507536),
 	MixpanelReport("utenti hanno aperto l'app", 13914117),
-	MixpanelReport("utenti hanno aperto l'app e sono autenticati", 13850683)]
+	MixpanelReport("utenti hanno aperto l'app e sono autenticati", 13850683),
+	MixpanelReport(None, 29779677, extractor=
+	lambda item: {"android": mp_extract("android/all")(item), "ios": mp_extract("ios/all")(item)},
+	               formatter=lambda data: f"- `{format_number(data['android'])}` utenti Android, `{format_number(data['ios'])}` utenti iOS")
+]
 users_section = SectionReports(":blue-heart-io: *Accesso e Utenti*", users_reports)
 
 # messages
@@ -34,14 +38,11 @@ devices_section = SectionReports(":iphone: *Dispositivi*", devices_reports)
 # preferences
 preferences_reports = [
 	MixpanelReport("utenti scelgono la configurazione rapida per i servizi", 15507584),
-	MixpanelReport("utenti accettano il tracking su Mixpanel", 13828137, extractor=lambda item: (item[
-		                                                                                             "MIXPANEL_SET_ENABLED - Unique"][
-		                                                                                             "true"][
-		                                                                                             "all"] /
-	                                                                                             item[
-		                                                                                             "MIXPANEL_SET_ENABLED - Unique"][
-		                                                                                             "$overall"][
-		                                                                                             "all"]) * 100)]
+	MixpanelReport("utenti accettano il tracking su Mixpanel", 13828137, extractor=lambda item: (mp_extract(
+		"MIXPANEL_SET_ENABLED - Unique/true/all")(item) /
+	                                                                                             mp_extract(
+		                                                                                             "MIXPANEL_SET_ENABLED - Unique/$overall/all")(
+		                                                                                             item) * 100))]
 preferences_section = SectionReports(":gear: *Preferenze*", preferences_reports)
 
 # payments
@@ -61,8 +62,8 @@ payments_reports = [MixpanelReport("utenti abbandonano un pagamento allo step fi
                                    extractor=mp_extract("carta di credito/all")),
                     MixpanelReport("pagamenti effettuati con Paypal", 27302180,
                                    extractor=mp_extract("paypal/all")),
-                    MixpanelReport("pagamenti effettuati con Bancomat Pay", 27302180,
-                                   extractor=mp_extract("bancomat pay/all")),
+                    # MixpanelReport("pagamenti effettuati con Bancomat Pay", 27302180,
+                    #                extractor=mp_extract("bancomat pay/all")),
 
                     MixpanelReport("percentuale pagamenti conclusi con successo allo step finale usando carte",
                                    29544467,
@@ -70,9 +71,9 @@ payments_reports = [MixpanelReport("utenti abbandonano un pagamento allo step fi
                     MixpanelReport("percentuale pagamenti conclusi con successo allo step finale usando Paypal",
                                    29544467,
                                    extractor=mp_extract("paypal/all")),
-                    MixpanelReport("percentuale pagamenti conclusi con successo allo step finale usando Bancomat Pay",
-                                   29544467,
-                                   extractor=mp_extract("bancomat pay/all")),
+                    # MixpanelReport("percentuale pagamenti conclusi con successo allo step finale usando Bancomat Pay",
+                    #                29544467,
+                    #                extractor=mp_extract("bancomat pay/all")),
                     MixpanelReport("strumenti di pagamento eliminati dal portafoglio", 28033951,
                                    extractor=mp_extract("successo/all"))]
 payments_section = SectionReports(":moneybag: *Pagamenti*", payments_reports)
@@ -90,6 +91,8 @@ paypal_section = SectionReports(":paypal: *Paypal*", paypal_reports)
 
 
 # assistance
+
+
 def assistance_formatter(data):
 	categories = data[list(data.keys())[0]]
 	total = categories["$overall"]["all"]
@@ -120,4 +123,3 @@ bpay_section = SectionReports(":bpay: *Bancomat Pay*", bpay_reports)
 sections: List[SectionReports] = [users_section, messages_section, profiles_section, devices_section,
                                   preferences_section, payments_section,
                                   credit_cards_section, paypal_section, bpay_section, assistance_section]
-
