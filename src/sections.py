@@ -11,10 +11,7 @@ users_reports = [
 	MixpanelReport("login avvenuti con SPID", 13850659),
 	MixpanelReport("login avvenuti con CIE", 15507536),
 	MixpanelReport("utenti hanno aperto l'app", 13914117),
-	MixpanelReport("utenti hanno aperto l'app e sono autenticati", 13850683),
-	MixpanelReport(None, 29779677, extractor=
-	lambda item: {"android": mp_extract("android/all")(item), "ios": mp_extract("ios/all")(item)},
-	               formatter=lambda data: f"- `{format_number(data['android'])}` utenti Android, `{format_number(data['ios'])}` utenti iOS")
+	MixpanelReport("utenti hanno aperto l'app e sono autenticati", 13850683)
 ]
 users_section = SectionReports(":blue-heart-io: *Accesso e Utenti*", users_reports)
 
@@ -30,7 +27,11 @@ profiles_reports = [MixpanelReport("richieste di cancellazione del profilo", 267
 profiles_section = SectionReports(":busts_in_silhouette: *Dati Profilo*", profiles_reports)
 
 # devices
-devices_reports = [MixpanelReport("dispositivi che supportano l'autenticazione biometrica", 15212227),
+devices_reports = [MixpanelReport(None, 29779677, extractor=
+lambda item: {"android": mp_extract("android/all")(item), "ios": mp_extract("ios/all")(item)},
+                                  formatter=lambda
+	                                  data: f"- `{format_number(data['android'])}` dispositivi Android, `{format_number(data['ios'])}` dispositivi iOS"),
+                   MixpanelReport("dispositivi che supportano l'autenticazione biometrica", 15212227),
                    MixpanelReport("dispositivi con lock screen impostato (pin, segno, faceId, fingerprint)",
                                   28134364)]
 devices_section = SectionReports(":iphone: *Dispositivi*", devices_reports)
