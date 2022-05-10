@@ -63,8 +63,8 @@ payments_reports = [MixpanelReport("utenti abbandonano un pagamento allo step fi
                                    extractor=mp_extract("carta di credito/all")),
                     MixpanelReport("pagamenti effettuati con Paypal", 27302180,
                                    extractor=mp_extract("paypal/all")),
-                    # MixpanelReport("pagamenti effettuati con Bancomat Pay", 27302180,
-                    #                extractor=mp_extract("bancomat pay/all")),
+                    MixpanelReport("pagamenti effettuati con Bancomat Pay", 27302180,
+                                   extractor=mp_extract("bancomat pay/all",True)),
 
                     MixpanelReport("percentuale pagamenti conclusi con successo allo step finale usando carte",
                                    29544467,
@@ -72,9 +72,9 @@ payments_reports = [MixpanelReport("utenti abbandonano un pagamento allo step fi
                     MixpanelReport("percentuale pagamenti conclusi con successo allo step finale usando Paypal",
                                    29544467,
                                    extractor=mp_extract("paypal/all")),
-                    # MixpanelReport("percentuale pagamenti conclusi con successo allo step finale usando Bancomat Pay",
-                    #                29544467,
-                    #                extractor=mp_extract("bancomat pay/all")),
+                    MixpanelReport("percentuale pagamenti conclusi con successo allo step finale usando Bancomat Pay",
+                                   29544467,
+                                   extractor=mp_extract("bancomat pay/all",True)),
                     MixpanelReport("strumenti di pagamento eliminati dal portafoglio", 28033951,
                                    extractor=mp_extract("successo/all"))]
 payments_section = SectionReports(":moneybag: *Pagamenti*", payments_reports)
@@ -124,3 +124,4 @@ bpay_section = SectionReports(":bpay: *Bancomat Pay*", bpay_reports)
 sections: List[SectionReports] = [users_section, messages_section, profiles_section, devices_section,
                                   preferences_section, payments_section,
                                   credit_cards_section, paypal_section, bpay_section, assistance_section]
+

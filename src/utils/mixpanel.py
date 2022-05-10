@@ -5,11 +5,13 @@ from time import sleep
 from models.report import Report
 
 
-def mp_extract(path):
+def mp_extract(path, key_may_not_exist = False):
 	resources = path.split("/")
 
 	def extract(item):
 		for r in resources:
+			if key_may_not_exist and r not in item:
+				return "no data"
 			item = item[r]
 		return item
 
