@@ -101,13 +101,13 @@ def assistance_formatter(data):
 	# sort categories in DESC order
 	sorted_categories = sorted(categories, key=lambda k: categories[k]["all"], reverse=True)
 	total_tickets = sum(c['all'] for c in categories.values())
-	slack_msg = f"- `{format_number(total_tickets)}` tickets aperti nel periodo"
+	slack_msg = f""
 	msg = []
 	for cat in sorted_categories[:6]:
 		amount = categories[cat]["all"]
 		percentage = format_number((amount / total) * 100.0)
-		msg.append(f"{format_number(amount)} ({percentage}) - {cat.replace('_', ' ')}")
-	slack_msg += "\n- principali categorie per cui il cittadino richiede assistenza\n```" + "\n".join(msg) + "```"
+		msg.append(f"{percentage} - {cat.replace('_', ' ')}")
+	slack_msg += "\n- principali categorie selezionate per l'assistenza (approssimazione, non corrisponde alle segnalazioni aperte)\n```" + "\n".join(msg) + "```"
 	return slack_msg
 
 
