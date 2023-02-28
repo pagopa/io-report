@@ -4,6 +4,7 @@
 name: IO report
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '55 6 * * 1'
 
